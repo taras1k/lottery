@@ -24,7 +24,7 @@ class FacebookStartPage(FormView):
 
     def post(self, request, *args, **kwargs):
         self.data['fb'] = fb_request_decode(request.POST.get('signed_request'))
-        if 'auth_token' in self.data['fb']
+        if 'oauth_token' in self.data['fb']:
             return self.render_to_response(self.data)
         else:
             return redirct(get_auth_url())
