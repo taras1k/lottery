@@ -1,0 +1,4 @@
+A less error occured trying to build your bundle. Please paste the error below in an issue for us at http://github.com/twitter/bootstrap! thanks!
+
+
+{"type":"Parse","message":"Syntax Error on line 766","index":24273,"filename":"bootstrap.css","line":766,"column":31,"extract":["// ------------------",".buttonBackground(@startColor, @endColor, @textColor: #fff, @textShadow: 0 -1px 0 rgba (0,0,0,.25)) {","  // gradientBar will set the background to a pleasing blend of these, to support IE<=9"]}
