@@ -29,6 +29,6 @@ def fb_request_decode(signed_request):
 def get_auth_url():
     oauth_url = "https://www.facebook.com/dialog/oauth/"
     oauth_url += "?client_id=%s" % keys.FACEBOOK_APP_ID
-    oauth_url += "&redirect_uri=https://apps.facebook.com/%s" % keys.FACEBOOK_APP_NAMESPACE
+    oauth_url += "&redirect_uri=https://apps.facebook.com/%s/" % keys.FACEBOOK_APP_NAMESPACE
     oauth_url += "&scope=%s" % keys.FACEBOOK_APP_PERMISSIONS
     return oauth_url
