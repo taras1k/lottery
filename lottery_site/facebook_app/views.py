@@ -25,5 +25,5 @@ class FacebookStartPage(FormView):
 
     def post(self, request, *args, **kwargs):
         self.data['fb'] = fb_request_decode(request.POST.get('signed_request'), FACEBOOK_APP_SECRET)
-        pass
+        return return self.render_to_response()
 
