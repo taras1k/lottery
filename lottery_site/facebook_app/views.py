@@ -28,7 +28,5 @@ class FacebookStartPage(FormView):
         if 'oauth_token' in self.data['fb']:
             return self.render_to_response(self.data)
         else:
-            self.data['fb'] = get_auth_url()
-            return self.render_to_response(self.data)
             return redirect(get_auth_url())
 
