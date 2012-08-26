@@ -1,7 +1,6 @@
 from django.views.generic.edit import FormView
 from facebook_app.forms import StartForm
-from facebook_app.keys import FACEBOOK_APP_SECRET
-from facebook_app.helpers import fb_request_decode
+from facebook_app.helpers import fb_request_decode, get_auth_url
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
@@ -24,6 +23,9 @@ class FacebookStartPage(FormView):
         return context
 
     def post(self, request, *args, **kwargs):
-        self.data['fb'] = fb_request_decode(request.POST.get('signed_request'), FACEBOOK_APP_SECRET)
-        return self.render_to_response(self.data)
+        self.data['fb'] = fb_request_decode(request.POST.get('signed_request'))
+        if 'auth_token' in self.data['fb']
+            return self.render_to_response(self.data)
+        else:
+            return redirct(get_auth_url())
 
