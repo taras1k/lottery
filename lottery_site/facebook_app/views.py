@@ -1,5 +1,5 @@
-from django.views.generic.base import TemplateView
+from django.views.generic import FormView
 
-class FacebookStartPage(TemplateView):
+class FacebookStartPage(FormView):
 
 	template_name = 'facebook_app/index.html'
