@@ -1,10 +1,10 @@
 {% extends 'base.html'%}
 {% block body %}
 {% if fb.oauth_token %}
-	Hello - {{ fb_user }}
+	{{ fb }}
 {% else %}
   <a target="_top" href="{{ oauth_url }}" class="btn btn-large btn-primary">Get Accsess</a>
 {%  endif %}
 
-{{ fb }}
+
 {%  endblock %}
