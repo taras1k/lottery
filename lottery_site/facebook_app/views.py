@@ -1,5 +1,6 @@
 from django.views.generic.edit import FormView
 from facebook_app.forms import StartForm
+from facebook_app.helpers import fb_request_decode
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
