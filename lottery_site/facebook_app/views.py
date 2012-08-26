@@ -17,7 +17,6 @@ class FacebookStartPage(FormView):
     def dispatch(self, *args, **kwargs):
         return super(FacebookStartPage, self).dispatch(*args, **kwargs)
 
-
     def get_context_data(self, **kwargs):
         context = super(FacebookStartPage, self).get_context_data(**kwargs)
         context['fb_user'] = self.data.get('fb_user', 'empty')
@@ -25,8 +24,7 @@ class FacebookStartPage(FormView):
 
     def post(self, request, *args, **kwargs):
         self.data['fb'] = fb_request_decode(request.POST.get('signed_request'))
-        if 'oauth_token' in self.data['fb']:
-            return self.render_to_response(self.data)
-        else:
-            return redirect(get_auth_url())
+        if 'oauth_token' not in self.data['fb']:            
+            self.data['oauth_url'] = get_auth_url()
+        return self.render_to_response(self.data)
 
