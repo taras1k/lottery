@@ -2,6 +2,7 @@ from django.views.generic.edit import FormView
 from facebook_app.forms import StartForm
 from facebook_app.helpers import fb_request_decode, get_auth_url
 from django.utils.decorators import method_decorator
+from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 
 class FacebookStartPage(FormView):
@@ -27,5 +28,5 @@ class FacebookStartPage(FormView):
         if 'oauth_token' in self.data['fb']:
             return self.render_to_response(self.data)
         else:
-            return redirct(get_auth_url())
+            return redirect(get_auth_url())
 
