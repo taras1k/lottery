@@ -1,2 +1,4 @@
 FACEBOOK_APP_SECRET = 'your secret key'
 FACEBOOK_APP_ID = 'your id key'
+FACEBOOK_APP_NAMESPACE = 'app namespace'
+FACEBOOK_APP_PERMISSIONS = 'app permissions'
