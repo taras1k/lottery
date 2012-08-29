@@ -1,6 +1,6 @@
 from django.views.generic.edit import FormView
 from facebook_app.forms import StartForm
-from facebook_app.helpers import get_auth_url
+from facebook_app.helpers import get_auth_url, get_page_install_url
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -32,6 +32,7 @@ class FacebookStartPage(FormView):
         if 'oauth_token' not in signed_request:            
            self.data['oauth_url'] = get_auth_url()
         else:
+            self.data['page_install_url'] = get_page_install_url()
             oauth_token = signed_request['oauth_token']
             graph = GraphAPI(oauth_token)
             self.data['fb']['user'] = graph.get('me')
