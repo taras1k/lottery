@@ -17,7 +17,7 @@ class FacebookPagePage(FormView):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
-        return super(FacebookStartPage, self).dispatch(*args, **kwargs)
+        return super(FacebookPagePage, self).dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         signed_request = request.POST.get('signed_request')
