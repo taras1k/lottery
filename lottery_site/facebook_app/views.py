@@ -23,6 +23,7 @@ class FacebookPagePage(FormView):
         signed_request = request.POST.get('signed_request')
         signed_request = SignedRequest.parse(signed_request, FACEBOOK_APP_SECRET)
         self.data['fb'] = signed_request
+        self.data['sig_rec'] = signed_request
         if 'oauth_token' not in signed_request:            
            self.data['oauth_url'] = get_auth_url()
         else:
