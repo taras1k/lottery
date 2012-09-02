@@ -4,6 +4,6 @@ from facebook_app.views import FacebookStartPage
 urlpatterns = patterns('',
 
      url(r'^$', FacebookStartPage.as_view(), name='facebook_home'),
-     url(r'page$', FacebookStartPage.as_view(), name='facebook_page'),
+     url(r'^page/$', FacebookStartPage.as_view(), name='facebook_page'),
     
 )
