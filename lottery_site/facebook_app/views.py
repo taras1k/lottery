@@ -1,11 +1,23 @@
 from django.views.generic.edit import FormView
-from facebook_app.forms import StartForm
+from facebook_app.forms import StartForm, PageForm
 from facebook_app.helpers import get_auth_url, get_page_install_url
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from facepy import GraphAPI, SignedRequest
 from keys import FACEBOOK_APP_SECRET
+
+class FacebookPagePage(FormView):
+
+    form_class = PageForm
+    template_name = 'facebook_app/page.html'
+
+    def __init__(self, *args, **kwargs):
+        self.data = {}
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(FacebookStartPage, self).dispatch(*args, **kwargs)
 
 
 class FacebookStartPage(FormView):
