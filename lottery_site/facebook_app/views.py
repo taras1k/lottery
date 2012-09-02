@@ -19,6 +19,18 @@ class FacebookPagePage(FormView):
     def dispatch(self, *args, **kwargs):
         return super(FacebookStartPage, self).dispatch(*args, **kwargs)
 
+    def post(self, request, *args, **kwargs):
+        signed_request = request.POST.get('signed_request')
+        signed_request = SignedRequest.parse(signed_request, FACEBOOK_APP_SECRET)
+        self.data['fb'] = signed_request
+        if 'oauth_token' not in signed_request:            
+           self.data['oauth_url'] = get_auth_url()
+        else:
+            oauth_token = signed_request['oauth_token']
+            graph = GraphAPI(oauth_token)
+            self.data['fb']['user'] = graph.get('me')
+        return self.render_to_response(self.data)
+
 
 class FacebookStartPage(FormView):
 
