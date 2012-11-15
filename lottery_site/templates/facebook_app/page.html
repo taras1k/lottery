@@ -8,6 +8,9 @@
 
     		<img src=https://graph.facebook.com/{{ fb.user_id }}/picture class="img-circle">
     		</div>
+                        {% if sig_rec.page.admin %}
+                          Admin page
+                        {% endif %}
    			<div class="bs-docs-example">
 				<table class="table table-striped">
 				<tbody>

@@ -1,3 +1,5 @@
+django-celery
+pytz
 Django == 1.4.1
 facepy
 

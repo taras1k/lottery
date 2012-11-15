@@ -1,11 +1,34 @@
 from django.views.generic.edit import FormView
-from facebook_app.forms import StartForm, PageForm
+from django.views.generic import TemplateView
+from facebook_app.forms import StartForm, PageForm, LotteryForm
 from facebook_app.helpers import get_auth_url, get_page_install_url
 from django.utils.decorators import method_decorator
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from facepy import GraphAPI, SignedRequest
 from keys import FACEBOOK_APP_SECRET
+
+class LotteryCreatedPage(TemplateView):
+
+    template_name = 'facebook_app/loterry_created.html'
+
+class CreateLotteryPage(FormView):
+
+    form_class = LotteryForm
+    template_name = 'facebook_app/create_lottery.html'
+    succes_url = '/lotery/created'
+
+    def __init__(self, *args, **kwargs):
+        self.data = {}
+
+    def post(self, request, *args, **kwargs):
+        self.data['page_id'] = request.session.get('page_id', 0)
+        self.data['is_admin'] = requset.session.get('is_admin')
+        return super(CreateLotteryPage, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.save_lottery()
+        return super(CreateLotteryPage, self).form_valid(form)
 
 class FacebookPagePage(FormView):
 
@@ -24,12 +47,15 @@ class FacebookPagePage(FormView):
         signed_request = SignedRequest.parse(signed_request, FACEBOOK_APP_SECRET)
         self.data['fb'] = signed_request
         self.data['sig_rec'] = signed_request
-        if 'oauth_token' not in signed_request:            
+        if 'oauth_token' not in signed_request:
            self.data['oauth_url'] = get_auth_url()
         else:
             oauth_token = signed_request['oauth_token']
             graph = GraphAPI(oauth_token)
             self.data['fb']['user'] = graph.get('me')
+            request.session['admin'] = True
+            request.session['page_id'] =\
+                signed_request.get('page').get('id', 0)
         return self.render_to_response(self.data)
 
 
@@ -54,7 +80,7 @@ class FacebookStartPage(FormView):
         signed_request = request.POST.get('signed_request')
         signed_request = SignedRequest.parse(signed_request, FACEBOOK_APP_SECRET)
         self.data['fb'] = signed_request
-        if 'oauth_token' not in signed_request:            
+        if 'oauth_token' not in signed_request:
            self.data['oauth_url'] = get_auth_url()
         else:
             self.data['page_install_url'] = get_page_install_url()
