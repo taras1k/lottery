@@ -1,7 +1,7 @@
 from lottery_site.settings import db
 
 
-class BaseModel():
+class BaseModel(object):
 
     def __init__(self, collection_name):
         self.data = {}

@@ -29,5 +29,6 @@
 	
 {% else %}
   <a target="_top" href="{{ oauth_url }}" class="btn btn-large btn-primary">Get Accsess</a>
+                          <a href="{% url facebook_app.create_lottery %}" class="btn btn-large btn-primary">Create Lottery</a>
 {%  endif %}
 {%  endblock %}

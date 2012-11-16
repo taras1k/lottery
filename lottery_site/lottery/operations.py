@@ -1,6 +1,6 @@
 from lottery.models import LotteryModel
 
-class BaseOperations():
+class BaseOperations(object):
 
     def __init__(self, model):
         self.model = model()

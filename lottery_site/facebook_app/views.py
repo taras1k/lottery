@@ -10,13 +10,13 @@ from keys import FACEBOOK_APP_SECRET
 
 class LotteryCreatedPage(TemplateView):
 
-    template_name = 'facebook_app/loterry_created.html'
+    template_name = 'facebook_app/lottery_created.html'
 
 class CreateLotteryPage(FormView):
 
     form_class = LotteryForm
     template_name = 'facebook_app/create_lottery.html'
-    succes_url = '/lotery/created'
+    success_url = '/facebook_app/lottery/created'
 
     def __init__(self, *args, **kwargs):
         self.data = {}

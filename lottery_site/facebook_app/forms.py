@@ -9,7 +9,7 @@ class PageForm(forms.Form):
 
 class LotteryForm(forms.Form):
     name = forms.CharField(initial='name o lottery')
-    likes_to_finish = forms.DecimalField()
+    likes_to_finish = forms.IntegerField()
 
     def save_lottery(self):
         #save lottery using the self.cleaned_data dictionary
