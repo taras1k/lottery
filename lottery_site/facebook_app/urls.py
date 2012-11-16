@@ -3,9 +3,9 @@ from facebook_app.views import FacebookStartPage, FacebookPagePage, CreateLotter
 
 urlpatterns = patterns('',
 
-     url(r'^$', FacebookStartPage.as_view(), name='facebook_home'),
-     url(r'^page/$', FacebookPagePage.as_view(), name='facebook_page'),
-     url(r'^page/create_lottery$', CreateLotteryPage.as_view(), name='lottery_create'),
-     url(r'^lotery/created/$', LotteryCreatedPage.as_view(), name='lottert_created'),
+     url(r'^$', FacebookStartPage.as_view(), name='facebok_app.facebook_home'),
+     url(r'^page/$', FacebookPagePage.as_view(), name='facebook_app.facebook_page'),
+     url(r'^page/create_lottery$', CreateLotteryPage.as_view(), name='facebook_app.create_lottery'),
+     url(r'^lotery/created/$', LotteryCreatedPage.as_view(), name='facebook_app.lottery_created'),
 
 )

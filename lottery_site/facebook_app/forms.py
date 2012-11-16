@@ -1,4 +1,5 @@
 from django import forms
+from lottery.operations import Lottery
 
 class StartForm(forms.Form):
     name = forms.CharField()
@@ -12,4 +13,6 @@ class LotteryForm(forms.Form):
 
     def save_lottery(self):
         #save lottery using the self.cleaned_data dictionary
-        pass
+        lottery = Lottery()
+        lottery.data = self.cleaned_data
+        lottery.save()

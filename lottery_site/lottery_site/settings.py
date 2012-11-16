@@ -1,5 +1,8 @@
 # Django settings for lottery_site project.
 import os.path
+from pymongo import Connection
+
+db = Connection()['lottery']
 
 PROJECT_ROOT = os.path.normpath(\
     os.path.dirname(os.path.dirname(__file__)))
