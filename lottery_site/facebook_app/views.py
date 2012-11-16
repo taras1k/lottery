@@ -23,7 +23,7 @@ class CreateLotteryPage(FormView):
 
     def post(self, request, *args, **kwargs):
         self.data['page_id'] = request.session.get('page_id', 0)
-        self.data['is_admin'] = requset.session.get('is_admin')
+        self.data['is_admin'] = request.session.get('is_admin')
         return super(CreateLotteryPage, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
