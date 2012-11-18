@@ -56,7 +56,7 @@ class FacebookPagePage(FormView):
             self.data['fb']['user'] = graph.get(
                 signed_request.get('page').get('id', 0))
             request.session['admin'] = True
-            request.session['token'] = oath_token
+            request.session['token'] = oauth_token
             request.session['page_id'] =\
                 signed_request.get('page').get('id', 0)
         return self.render_to_response(self.data)
