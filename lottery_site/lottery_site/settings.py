@@ -1,6 +1,9 @@
 # Django settings for lottery_site project.
 import os.path
 from pymongo import Connection
+from datetime import timedelta
+import djcelery
+djcelery.setup_loader()
 
 db = Connection()['lottery']
 
@@ -59,6 +62,24 @@ MEDIA_ROOT = ''
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = ''
 
+#celery settings
+BROKER_URL = 'mongodb://localhost:27017/lottery'
+
+CELERY_MONGODB_BACKEND_SETTINGS = {
+    'host': BROKER_URL,
+    'taskmeta_collection': 'teskmeta'
+}
+
+
+CELERYBEAT_SCHEDULE = {
+    'runs-every-30-seconds': {
+    'task': 'lottery.tasks.add',
+    'schedule': timedelta(seconds=30),
+    'args': (16, 16)
+    },
+}
+
+CELERY_TIMEZONE = 'UTC'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -124,6 +145,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'lottery',
     'djcelery',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
@@ -137,8 +159,6 @@ INSTALLED_APPS = (
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 
-import djcelery
-djcelery.setup_loader()
 
 SITE_URL = 'http://lottery.nek.me/'
 

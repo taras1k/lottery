@@ -23,11 +23,12 @@ class CreateLotteryPage(FormView):
 
     def post(self, request, *args, **kwargs):
         self.data['page_id'] = request.session.get('page_id', 0)
-        self.data['is_admin'] = request.session.get('is_admin')
+        self.data['is_admin'] = request.session.get('is_admin', False)
+        self.data['token'] = request.session.get('token', 0)
         return super(CreateLotteryPage, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.save_lottery()
+        form.save_lottery(self.data['page_id'], self.data['token'])
         return super(CreateLotteryPage, self).form_valid(form)
 
 class FacebookPagePage(FormView):
@@ -52,8 +53,10 @@ class FacebookPagePage(FormView):
         else:
             oauth_token = signed_request['oauth_token']
             graph = GraphAPI(oauth_token)
-            self.data['fb']['user'] = graph.get('me')
+            self.data['fb']['user'] = graph.get(
+                signed_request.get('page').get('id', 0))
             request.session['admin'] = True
+            request.session['token'] = oath_token
             request.session['page_id'] =\
                 signed_request.get('page').get('id', 0)
         return self.render_to_response(self.data)
