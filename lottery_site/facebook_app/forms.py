@@ -9,7 +9,8 @@ class PageForm(forms.Form):
 
 class LotteryForm(forms.Form):
     name = forms.CharField(initial='name o lottery')
-    image = forms.ImageField()
+    image = forms.ImageField(required=False)
+    image_url = forms.URLField(required=False)
     likes_to_finish = forms.IntegerField()
 
     def save_lottery(self, page_id, token):
