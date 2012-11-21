@@ -9,13 +9,13 @@ class PageForm(forms.Form):
 
 class LotteryForm(forms.Form):
     name = forms.CharField(initial='name o lottery')
+    image = forms.ImageField()
     likes_to_finish = forms.IntegerField()
 
     def save_lottery(self, page_id, token):
         #save lottery using the self.cleaned_data dictionary
-        lottery = Lottery()
-        lottery.data['page_id'] = page_id
-        lottery.data['completed'] = 0
-        lottery.data['token'] = token
-        lottery.data = self.cleaned_data
-        lottery.save()
+        data = self.cleaned_data
+        data['page_id'] = page_id
+        data['token'] = token
+        lottery = Lottery(data)
+        lottery.start()

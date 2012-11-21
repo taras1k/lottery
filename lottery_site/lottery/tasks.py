@@ -14,4 +14,6 @@ def check_lotteries():
     lottery = Lottry()
     for incompleted_lotteries in lottery.get_incompleted():
         graph = GraphAPI(incompleted_lotteries['token'])
+        page = graph.get(incompleted_lotteries['page_id'])
+        if page.get('likes', 0) >= incompleated_lotteries['']
         pass

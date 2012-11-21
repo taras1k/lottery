@@ -1,6 +1,7 @@
 django-celery
 django-celery-with-mongodb
 pytz
+pil
 Django == 1.4.1
 facepy
 pymongo
