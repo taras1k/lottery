@@ -35,7 +35,7 @@ class Lottery(BaseOperations):
             graph = GraphAPI(page_token)
             graph.post('%s' % self.data['page_id'],
 #                image=self.data['image'].read())
-                message='bla')
+                message='bla-bla')
             del self.data['image']
         self.save()
 
