@@ -11,9 +11,11 @@ def add(x, y):
 
 @task()
 def check_lotteries():
-    lottery = Lottry()
-    for incompleted_lotteries in lottery.get_incompleted():
-        graph = GraphAPI(incompleted_lotteries['token'])
-        page = graph.get(incompleted_lotteries['page_id'])
-        if page.get('likes', 0) >= incompleated_lotteries['']
-        pass
+    lotteries = Lottry()
+    for lottery in lotteries.get_incompleted():
+        graph = GraphAPI(lottery['token'])
+        page = graph.get(lottery['post_id'])
+        if page.get('likes', 0) >=lottery['likes_to_finish']:
+            fb_page = GraphAPI(lottery['page_token'])
+            post = graph.post(path='%s/feed' % lottery['page_id'],
+                message='success')

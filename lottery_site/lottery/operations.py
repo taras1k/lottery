@@ -33,9 +33,11 @@ class Lottery(BaseOperations):
                 break
         if page_token and 'image_url' in self.data:
             graph = GraphAPI(page_token)
-            graph.post(path='%s/feed' % self.data['page_id'],
+            post = graph.post(path='%s/feed' % self.data['page_id'],
 #                image=self.data['image'].read())
                 message='bla-bla')
             del self.data['image']
+            self.data['page_token'] = page_token
+            self.data['post_id'] = post['id']
         self.save()
 

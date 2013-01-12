@@ -72,10 +72,9 @@ CELERY_MONGODB_BACKEND_SETTINGS = {
 
 
 CELERYBEAT_SCHEDULE = {
-    'runs-every-30-seconds': {
+    'runs-every-60-seconds': {
     'task': 'lottery.tasks.add',
-    'schedule': timedelta(seconds=30),
-    'args': (16, 16)
+    'schedule': timedelta(seconds=60),
     },
 }
 
