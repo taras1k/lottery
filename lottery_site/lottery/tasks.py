@@ -11,7 +11,7 @@ def add(x, y):
 
 @task()
 def check_lotteries():
-    lotteries = Lottry()
+    lotteries = Lottery()
     for lottery in lotteries.get_incompleted():
         graph = GraphAPI(lottery['token'])
         page = graph.get(lottery['post_id'])
