@@ -13,7 +13,7 @@ def add(x, y):
 def check_lotteries():
     lotteries = Lottery()
     for lottery in lotteries.get_incompleted():
-        graph = GraphAPI(lottery['token'])
+        graph = GraphAPI(lottery['page_token'])
         page = graph.get(lottery['post_id'])
         if page.get('likes', 0) >=lottery['likes_to_finish']:
             fb_page = GraphAPI(lottery['page_token'])
