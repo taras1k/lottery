@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from facepy import GraphAPI, SignedRequest
 from keys import FACEBOOK_APP_SECRET
+from lottery.tasks import check_lotteries
 
 class LotteryCreatedPage(TemplateView):
 
@@ -29,6 +30,7 @@ class CreateLotteryPage(FormView):
 
     def form_valid(self, form):
         form.save_lottery(self.data['page_id'], self.data['token'])
+        check_lotteries()
         return super(CreateLotteryPage, self).form_valid(form)
 
 class FacebookPagePage(FormView):

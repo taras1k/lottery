@@ -19,3 +19,5 @@ def check_lotteries():
             fb_page = GraphAPI(lottery['page_token'])
             post = graph.post(path='%s/feed' % lottery['page_id'],
                 message='success')
+        post = graph.post(path='%s/feed' % lottery['page_id'],
+            message='test cel')
